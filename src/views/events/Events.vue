@@ -32,11 +32,15 @@ export default {
       for (let i = 0; i < data.length; i++) {
         var event = data[i];
         if (event.thumbPath) {
-          await UploadService.getImage(event.thumbPath).then((response) => {
-            event.thumbPathURL = URL.createObjectURL(
-              new Blob([response.data])
-            );
-          });
+          await UploadService.getImage(event.thumbPath)
+            .then((response) => {
+              event.thumbPathURL = URL.createObjectURL(
+                new Blob([response.data])
+              );
+            })
+            .catch((e) => {
+              console.log(e);
+            });
         }
       }
 
